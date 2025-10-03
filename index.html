@@ -7,36 +7,82 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <form
-      action="https://2017.awiclass.monoame.com/api/demo/feedback"
-      method="post"
-    >
+    <form id="feedbackForm">
       <img
         src="https://2017.awiclass.monoame.com/img/form_leaf.svg"
-        alt="leaf"
+        alt="茶葉圖示"
       />
       <h2>幫助我們變得更好!</h2>
-      <input name="name" placeholder="輸入姓名" />
-      <select name="option">
-        <option value="" disabled selected>使用產品</option>
-        <option value="鐵觀音">鐵觀音</option>
-        <option value="炭焙烏龍">炭焙烏龍</option>
-        <option value="伯爵紅茶">伯爵紅茶</option>
-      </select>
-      <textarea name="comment" placeholder="使用心得" rows="8"></textarea>
-      <div class="recommand">
-        <input type="radio" name="recommand" value="yes" id="yes" />
-        <label for="yes">會推薦給朋友</label>
-        <input type="radio" name="recommand" value="no" id="no" />
-        <label for="no">不推薦</label>
+
+      <div class="form-group">
+        <label for="name">姓名 <span style="color: #ff6b6b">*</span></label>
+        <input
+          id="name"
+          name="name"
+          placeholder="請輸入姓名"
+          required
+          aria-required="true"
+        />
+        <div class="error-message" id="name-error"></div>
       </div>
-      <div class="feedback"></div>
-      <button type="submit">送出意見</button>
-      <button type="button" class="ajaxbtn">送出意見(AJAX)</button>
+
+      <div class="form-group">
+        <label for="option"
+          >使用產品 <span style="color: #ff6b6b">*</span></label
+        >
+        <select id="option" name="option" required aria-required="true">
+          <option value="" disabled selected>請選擇產品</option>
+          <option value="鐵觀音">鐵觀音</option>
+          <option value="炭焙烏龍">炭焙烏龍</option>
+          <option value="伯爵紅茶">伯爵紅茶</option>
+        </select>
+        <div class="error-message" id="option-error"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="comment"
+          >使用心得 <span style="color: #ff6b6b">*</span></label
+        >
+        <textarea
+          id="comment"
+          name="comment"
+          placeholder="請分享您的使用心得"
+          rows="8"
+          required
+          aria-required="true"
+        ></textarea>
+        <div class="error-message" id="comment-error"></div>
+      </div>
+
+      <div class="form-group">
+        <label>推薦意願 <span style="color: #ff6b6b">*</span></label>
+        <div class="recommand">
+          <div class="radio-group">
+            <input
+              type="radio"
+              name="recommand"
+              value="yes"
+              id="yes"
+              required
+            />
+            <label for="yes">會推薦給朋友</label>
+          </div>
+          <div class="radio-group">
+            <input type="radio" name="recommand" value="no" id="no" required />
+            <label for="no">不推薦</label>
+          </div>
+        </div>
+        <div class="error-message" id="recommand-error"></div>
+      </div>
+
+      <div class="feedback" id="feedback" role="alert" aria-live="polite"></div>
+
+      <button type="submit" id="submitBtn">送出意見</button>
+      <button type="button" id="ajaxBtn">送出意見 (AJAX)</button>
+
       <input name="json" type="hidden" value="" />
     </form>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>

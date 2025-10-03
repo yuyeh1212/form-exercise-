@@ -16,46 +16,73 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0;
+  padding: 20px;
   font-family: Arial, sans-serif;
 }
 
 form {
   background-color: #1f4545;
   color: white;
-  padding: 30px 100px;
+  padding: 40px 60px;
   display: flex;
   flex-direction: column;
-  max-width: 300px;
+  max-width: 500px;
+  width: 100%;
   letter-spacing: 1px;
   border-bottom: 5px solid #ecdfcc;
   box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.2);
 }
 
 form img {
-  width: 120px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 140px;
+  margin: 0 auto 25px;
 }
 
 form > * {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 form h2 {
   font-weight: normal;
   text-align: center;
+  margin: 0 0 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 20px;
+}
+
+label {
+  font-size: 15px;
+  margin-bottom: 8px;
+  color: #ecdfcc;
 }
 
 input,
 textarea,
 select {
-  padding: 8px 15px;
-  font-size: 14px;
+  padding: 12px 15px;
+  font-size: 15px;
   border-radius: 0px;
   opacity: 0.9;
   outline: none;
-  border: none;
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  opacity: 1;
+  border-color: #ecdfcc;
+}
+
+input.error,
+textarea.error,
+select.error {
+  border-color: #ff6b6b;
 }
 
 input::-moz-placeholder, textarea::-moz-placeholder {
@@ -67,64 +94,143 @@ textarea::placeholder {
   color: rgba(26, 54, 54, 0.4);
 }
 
-select,
-input[type=radio] {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
 select {
   background-color: white;
   cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%231a3636' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 35px;
 }
 
 .recommand {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
 }
 
-.recommand label {
-  margin-right: 40px;
-  margin-left: 5px;
-  cursor: pointer;
+.radio-group {
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
 }
 
-input[type=radio] {
+.recommand input[type=radio] {
   padding: 0;
   width: 20px;
   height: 20px;
+  margin: 0 5px 0 0;
   border: 2px solid white;
   border-radius: 50%;
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.3s;
   background-color: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
-input[type=radio]:checked {
+.recommand input[type=radio]:checked {
   background-color: #ecdfcc;
   border-color: #ecdfcc;
 }
 
+.recommand label {
+  margin: 0;
+  cursor: pointer;
+  color: white;
+}
+
+.error-message {
+  color: #ff6b6b;
+  font-size: 12px;
+  margin-top: 5px;
+  min-height: 18px;
+}
+
 button {
   background-color: transparent;
-  padding: 8px;
+  padding: 10px;
   color: white;
   cursor: pointer;
   border: 1px solid white;
   font-size: 14px;
   transition: 0.3s;
+  position: relative;
 }
 
-button:hover {
+button:hover:not(:disabled) {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button.loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid white;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 .feedback {
   color: #ecdfcc;
   font-size: 14px;
   min-height: 20px;
   text-align: center;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.feedback.success {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: #a8e6a3;
+}
+
+.feedback.error {
+  background-color: rgba(255, 107, 107, 0.2);
+  color: #ff6b6b;
+}
+
+/* RWD */
+@media (max-width: 600px) {
+  form {
+    padding: 30px 40px;
+  }
+  .radio-group {
+    margin-right: 15px;
+  }
+}
+@media (max-width: 400px) {
+  form {
+    padding: 20px;
+  }
+  .recommand {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .radio-group {
+    margin-right: 0;
+  }
 }/*# sourceMappingURL=style.css.map */
